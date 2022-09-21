@@ -1,10 +1,10 @@
-{% extends "./base.html" %}
+{% extends "./index.html" %}
 
-{% block title %} Manage Health Metrics {% endblock %}
+{% block title %} Health metrics management {% endblock %}
 
 {% block body %}
 <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
         {% if messages %}
         {% for message in messages %}
         <div class="alert alert-dismissible alert-success">
@@ -13,22 +13,36 @@
         </div>
         {% endfor %}
         {% endif %}
-        <h2>Heal Metrics</h2>
+        <h2>Add user info</h2>
         <div class="card">
             <div class="card-body">
-                <form action="/registrarCurso/" method="POST">{% csrf_token %}
+                <form action="/registeruser/" method="POST">{% csrf_token %}
                     <div class="form-group">
-                        <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Código"
-                            minlength="6" maxlength="6" required>
+                        <input type="text" id="txtName" name="txtName" class="form-control" placeholder="Name" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre"
+                        <input type="text" id="txtLastname" name="txtLastname" class="form-control" placeholder="Lastname"
                             maxlength="50" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="numCreditos" name="numCreditos" class="form-control" min="1" max="9"
-                            value="1" required>
+                        <input type="number" id="txtAge" name="txtAge" class="form-control" placeholder="Age" required>
                     </div>
+                    <div class="form-group">
+                        <input type="number" id="txtWeight" name="txtWeight" class="form-control" placeholder="Weight" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" id="txtHearRate" name="txtHearRate" class="form-control" placeholder="HearRate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" id="txtOxygenSaturation" name="txtOxygenSaturation" class="form-control" placeholder="OxygenSaturation" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" id="txtStressLevel" name="txtStressLevel" class="form-control" placeholder="txtStressLevel" required>
+                    </div>
+
                     <div class="form-group">
                         <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
                     </div>
@@ -36,28 +50,35 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
-        <h1>Listado de Cursos</h1>
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Info List</h1>
         <div class="table-responsive py-2">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Código</th>
-                        <th>Nombre</th>
-                        <th>Créditos</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Weight</th>
+                        <th>HearRate</th>
+                        <th>OxygenSaturation</th>
+                        <th>StressLevel</th>
                         <th colspan="2">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for c in cursos %}
+                    {% for u in users %}
                     <tr>
-                        <td>{{forloop.counter}}</td>
-                        <td>{{c.codigo}}</td>
-                        <td>{{c.nombre}}</td>
-                        <td>{{c.creditos}}</td>
-                        <td><a href="edicionCurso/{{c.codigo}}" class="btn btn-info">Editar</a></td>
-                        <td><a href="eliminarCurso/{{c.codigo}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                        <td>{{u.id}}</td>
+                        <td>{{u.name}}</td>
+                        <td>{{u.age}}</td>
+                        <td>{{u.weight}}</td>
+                        <td>{{u.hearRate}}</td>
+                        <td>{{u.oxygenSaturation}}</td>
+                        <td>{{u.stressLevel}}</td>
+                        
+                        <td><a href="editingUser/{{u.id}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="deleteUser/{{u.id}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

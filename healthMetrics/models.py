@@ -17,12 +17,11 @@ class User(models.Model):
     id: models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
     age = models.CharField(max_length=100)
-    weight = models.DecimalField(max_digits=5, decimal_places=2)
-    hearRate = models.DecimalField(max_digits=100, decimal_places=4)
-    oxygenSaturation = models.DecimalField(max_digits=100, decimal_places=4)
-    stressLevel = models.DecimalField(max_digits=100, decimal_places=4)
+    weight = models.CharField(max_length=100)
+    hearRate = models.CharField(max_length=100)
+    oxygenSaturation = models.CharField(max_length=100)
+    stressLevel = models.CharField(max_length=100)
     
     def __str__(self):
         text =  "{0} {1}"
